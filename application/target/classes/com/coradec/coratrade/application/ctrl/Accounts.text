@@ -1,0 +1,4 @@
+# Localized textbase for default locale of object Accounts
+
+AccountDeleted: Account "%s" has been deactivated.
+AccountCreated: Account "%s" has been created.

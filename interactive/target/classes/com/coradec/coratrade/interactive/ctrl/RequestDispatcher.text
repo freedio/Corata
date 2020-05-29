@@ -1,0 +1,8 @@
+# Localized text base for default locale of RequestDispatcher
+
+StartingCommandDispatcher: Starting command dispatcher.
+SignalProcessorStarted: Signal processor started.
+SignalProcessorTerminated: Signal processor terminated.
+ShuttingDownCommandDispatcher: Shutting down command dispatcher — connected since %s.
+UnknownEvent: Unknown event \"%s\"!
+RelaxAfterRequest: Relaxing for %d ms after last TWS request...

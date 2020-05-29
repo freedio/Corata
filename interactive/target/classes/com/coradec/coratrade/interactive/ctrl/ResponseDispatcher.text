@@ -1,0 +1,13 @@
+# Localized text base for default locale of class ResponseDispatcher
+
+ApiError: An API error occurred!
+ApiErrorMessage: Received API error message!
+
+TwsConnectionError: TWS connection error %d: %s
+TwsInformation: TWS information %d: %s
+TwsRequestInfo: TSW information %d in request %d: %s
+TwsWarning: TWS warning %d: %s
+TwsRequestWarning: TSW waring %d in request %d: %s
+ClientError: Client error %d: %s
+TwsError: TWS error %d: %s
+TwsRequestError: TWS error %d in request %d: %s
