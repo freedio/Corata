@@ -4,6 +4,7 @@
 
 package com.coradec.coratrade.interactive.ctrl
 
+import com.coradec.coradeck.core.util.caller
 import com.coradec.coradeck.ctrl.ctrl.impl.BasicAgent
 import com.coradec.coradeck.text.model.LocalizedText
 import com.coradec.coratrade.interactive.comm.model.impl.*
@@ -426,20 +427,20 @@ object ResponseDispatcher : BasicAgent(), EWrapper {
 
     override fun error(problem: Exception) {
         if (problem !is SocketException && RequestDispatcher.connected) {
-            inject(ApiErrorEvent(this, exception = problem))
+            inject(ApiErrorEvent(caller, exception = problem))
             error(problem, TEXT_API_ERROR1)
         }
     }
 
     override fun error(problem: String) {
-        inject(ApiErrorEvent(this, message = problem))
+        inject(ApiErrorEvent(caller, message = problem))
         error(TEXT_API_ERROR2, problem)
     }
 
     override fun error(requestId: Int, errorCode: Int, errorMsg: String) {
         when (errorCode) {
             in 1100..1999 -> {
-                inject(ConnectionErrorEvent(this, errorCode, errorMsg))
+                inject(ConnectionErrorEvent(caller, errorCode, errorMsg))
                 error(TEXT_TWS_CONNECTION_ERROR, errorCode, errorMsg)
             }
             2104, 2106, 2158 ->
@@ -449,16 +450,16 @@ object ResponseDispatcher : BasicAgent(), EWrapper {
                 if (requestId == -1) warn(TEXT_TWS_WARNING, errorCode, errorMsg)
                 else warn(TEXT_TWS_REQUEST_WARNING, errorCode, requestId, errorMsg)
             in 500..504 -> {
-                inject(ClientErrorEvent(this, errorCode, errorMsg))
+                inject(ClientErrorEvent(caller, errorCode, errorMsg))
                 error(TEXT_CLIENT_ERROR, errorCode, errorMsg)
             }
             else ->
                 if (requestId == -1) {
-                    inject(TwsErrorEvent(this, errorCode, errorMsg))
+                    inject(TwsErrorEvent(caller, errorCode, errorMsg))
                     error(TEXT_TWS_ERROR, errorCode, errorMsg)
                 }
                 else {
-                    inject(TwsRequestErrorEvent(this, requestId, errorCode, errorMsg))
+                    inject(TwsRequestErrorEvent(caller, requestId, errorCode, errorMsg))
                     error(TEXT_TWS_REQUEST_ERROR, errorCode, requestId, errorMsg)
                 }
         }

@@ -1,0 +1,6 @@
+# Localized text file of class SecurityDiscoveryModule
+
+FailedToReadFile: Failed to read file «%s»!
+FileNotProcessed: Don't know how to process file «%s»!
+Processed: Security Discovery: %d file(s) processed, %d input(s) deleted after processing.
+TextProcessingInterrupted: Processing of file «%s» was interrupted!

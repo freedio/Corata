@@ -6,4 +6,9 @@ package com.coradec.coratrade.application.ctrl.impl
 
 import com.coradec.coradeck.bus.model.impl.BasicBusModule
 
-class SecurityRatingModule: BasicBusModule()
+class SecurityRatingModule: BasicBusModule() {
+    override fun onReady() {
+        super.onReady()
+        finish()
+    }
+}

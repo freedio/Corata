@@ -13,6 +13,7 @@ import java.time.LocalDateTime.now
 class TWSErrorLogEntry(origin: Origin, requestId: Int, private val errorCode: Int, private val errorMsg: String) :
         BasicResponseEvent(origin, requestId, now()), LogEntry {
     override val level = LogLevel.ERROR
+    override val worker: Thread = Thread.currentThread()
 
     override fun formattedWith(format: String): String =
         String.format("%tF %<tT.%<tL %5s %s",

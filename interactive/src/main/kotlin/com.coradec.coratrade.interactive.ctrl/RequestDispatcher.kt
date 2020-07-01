@@ -55,7 +55,7 @@ object RequestDispatcher : BasicAgent(), Observer {
     private val signal = EJavaSignal()
     private val client by lazy { EClientSocket(ResponseDispatcher, signal) }
     private val reader by lazy { EReader(client, signal) }
-    private val processor = Thread(::process, "SignalProcessor")
+    private val processor = Thread(::process, "IBKRSigP")
     private lateinit var connection : ConnectionVoucher
     val connected: Boolean get() = connection.value()
     lateinit var managedAccounts: ManagedAccountsVoucher
