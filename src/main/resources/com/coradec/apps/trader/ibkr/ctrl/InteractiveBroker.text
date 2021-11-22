@@ -1,0 +1,10 @@
+# Localized text base for default locale of class InteractiveBroker
+
+StartingSignalProcessor: Starting Interactive signal processor.
+SignalProcessorTerminated: Interactive signal processor terminated.
+StartingInteractiveBroker3: Starting Interactive broker #%d on %s:%d.
+FinalizingInteractiveBroker: Interactive broker shutting down.
+InteractiveError2: Request[%d]: Error %d!
+InteractiveException3: Request[%d]: Error %d!\n%s
+InteractiveMessageError3: Request[%d]: Error %d («%s»)!
+InteractiveMessageException4: Request[%d]: Error %d («%s»)!\n%s

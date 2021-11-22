@@ -1,0 +1,111 @@
+# Localized textbase for defult locale of class InteractiveResponseHandler
+
+TickPriceInfo: Ticker[%d]: receiving tick price for field %d ‹%s›, actual price %.3f, and attributes %s.
+TickSizeInfo: Ticker[%d]: receiving tick size for field %d ‹%s› and actual size %d.
+TickOptionComputation: Ticker[%d]: receiving tick option computation for field %d ‹%s›, tick base %s, implied volatility %.6f, \
+    delta %.6f, option price %.3f, present value of dividends %.6f, gamma %.6f, vega %.6f, theta %.6f, and \
+    underlying price %.3f.
+TickGeneric: Ticker[%d]: receiving generic tick for field %d ‹%s› and value %.6f.
+TickString: Ticker[%d]: receiving string tick for field %d ‹%s› and value «%s».
+TickEFP: Ticker[%d]: receiving EFP tick for type %d ‹%s›, basis points %.6f (%s), implied future %.6f, %d hold days, stock future \
+    expiration date %s, dividend impact %.6f, and expected dividends until expiration %.6f.
+OrderStatus: Order[%d]: receiving status update for state ‹%s›, %d filled and %d remaining positions @ average fill price %.6f \
+    and last fill price %.6f permanent ID %d, parent ID %d from client %d, holding reason ‹%s› and market cap price %.6f.
+OpenOrder: Order[%d]: receiving open order for contract ‹%s›, order ‹%s›, and order state ‹%s›.
+EndOpenOrders: All open orders received.
+UpdateAccountValue: Request[%d]: updating account ‹%s› property ‹%s› to value ‹%s %s›.
+UpdateAccountValueCurrency: Request[%d]: updating account ‹%s› property ‹%s› to value ‹%s› using currency ‹%s›.
+AccountLastUpdated: Account[%s]: last updated at %s.
+AccountUpdated: Account[%s] updated.
+NextOrderId: Next valid order ID is %d.
+ContractDetails: Request[%d]: contract details = %s.
+BondContractDetails: Request[%d]: bond contract details = %s.
+EndContractDetails: Request[%d]: all contract details received.
+ExecutionDetails: Request[%d]: execution details for contract ‹%s›: %s.
+EndExecutionDetails: Request[%d]: all execution details reported.
+UpdateMarketDepth: Ticker[%d]: receiving market depth update for position %d: %s price = %.3f size = %d on ‹%s›.
+UpdateMarketDepthL2: Ticker[%d]: receiving REGULAR market depth level 2 update for position %d with market maker ‹%s›: \
+    %s price = %.3f size = %d on ‹%s›.
+UpdateMarketDepthL2Smart: Ticker[%d]: receiving SMART market depth level 2 update for position %d with market maker ‹%s›: \
+    %s price = %.3f size = %d on ‹%s›.
+NewsBulletinUpdate: Message[%d]: message «%s» from %s exchange ‹%s›.
+ManagedAccounts: Managed accounts: %s.
+FinAdvConfiguration: Receiving Financial Advisor Configuration «%s» with data type %s.
+HistoricalDataBar: Request[%d]: receiving historical data bar «%s».
+ScannerParameters: Receiving scanner parameters «%s».
+ScannerData: Request[%d]: receiving scanner data with rank %d for distance ‹%s›, benchmark ‹%s›, projection ‹%s›, combo legs ‹%s›, \
+    and contract details «%s».
+EndScannerData: Request[%d]: all scanner data received.
+RealtimeData: Request[%d]: receiving realtime data as of %s: open = %.3f, high = %.3f, low = %.3f, \
+    close = %.3f, weighted average orice = %.3f, #trades in period: %d.
+CurrentTime: Receiving current TWS date and time as ‹%s›.
+FundamentalData: Request[%d]: receiving fundamental data «%s».
+DeltaNeutralContract: Request[%d]: receiving delta neutral contract ‹%s›.
+EndSnapshotTick: Ticker[%d]: all snapshots received.
+CommissionReport: Receiving commission report ‹%s›.
+Position: Receiving position report for account ‹%s›: %d positions of contract ‹%s› at average cost %.3f.
+EndPositions: All positions received.
+AccountSummary: Request[%d]: receiving summary position of account ‹%s›: %s = ‹%s›
+AccountSummaryCurrency: Request[%d]: receiving summary position of account ‹%s›: %s = ‹%s %s›
+EndAccountSummary: All summary positions received.
+VerifyMessageAPI: Verifying message API «%s».
+VerificationSuccessful: Verification successful.
+VerificationFailed: Verification failed: %s!
+VerifyAndAuthMessageAPI: Verify «%s» and authenticate message API «%s».
+VerificationAndAuthSuccessful: Verification and authentication successful.
+VerificationAndAuthFailed: Verification and authentication failed: %s!
+DisplayGroupList: Request[%d]: receiving display group list ‹%s›.
+DisplayGroupUpdated: Request[%d]: receiving display group update «%s».
+Error: receiving an error with message «%s»!
+CodedError: Request[%d]: Error %d «%s»!
+CodedNotification: Receiving information %d «%s».
+ConnectionClosed: Connection closed.
+AcknowledgeConnect: Connection attempt acknowledged.  Waiting for next valid order ID ...
+PositionMulti: Request[%d]: receiving position report for account ‹%s› model ‹%s›: %d positions of contract ‹%s› at average cost %.3f.
+EndPositionsMulti: Request[%d]: all positions received.
+UpdateAccount: Request[%d]: updating property ‹%s› to value ‹%s›.
+UpdateAccountCurrency: Request[%d]: updating property ‹%s› to value ‹%s %s›.
+AccountUpdatedMulti: Request[%d]: all properties updated.
+SecurityDefinitionOptionParameter: Request[%d]: receiving ‹%s› option chain for underlying #%d on exchange ‹%s›: \
+    multiplier ‹%s›, expirations: %s, strikes: %s.
+SecurityDefinitionOptionParameterEnd: Request[%d]: all option chains received.
+SoftDollarTiers: Request[%d]: receiving soft dollar tiers %s.
+FamilyCodes: Receiving family codes %s.
+SymbolSamples: Receiving symbol samples %s.
+EndHistoricalData: Request[%d]: all historical data between %s and %s received.
+MarketDepthExchanges: Receiving market depth descriptions %s.
+NewsTick: Ticker[%d]: receiving news tick at %s from %s with article ID ‹%s›: «%s», extra: «%s».
+SmartComponents: Request[%d]: receiving smart component table %s.
+TickRequestParameters: Ticker[%d]: receiving tick request parameters: minimum tick: %.3f, BBO exchange ‹%s›, and snapshot \
+    permissions %s.
+NewsProviders: receiving list of subscribed news providers: %s.
+NewsArticle: Request[%d]: receiving article of type %d: «%s».
+HistoricalNews: Request[%d]: Historical article %s of %s from %s: «%s».
+HistoricalNewsEnd: Request[%d]: all historical news received.
+HistoricalNewsEndButMore: Request[%d]: historical news so far received, but there is more.
+HeadTimestamp: Request[%d]: receiving head timestamp ‹%s›.
+HistogramData: Request[%d]: receiving histogram data: %s.
+HistoricalDataUpdate: Request[%d]: receiving historical data update ‹%s›.
+MarketDataReroute: Request[%d]: contract ‹%s› rerouted to exchange ‹%s›.
+MarketDepthReroute: Request[%d]: contract ‹%s› level 2 data rerouted to exchange ‹%s›.
+MarketRule: receiving market rule %d: price increments: %s.
+Profit&Loss: Request[%d]: receiving total profit & loss: daily = %.3f, realized = %.3f, unrealized = %.3f.
+SingleProfit&Loss: Request[%d]: receiving profit & loss for position %d: daily = %.3f, realized = %.3f, \
+    unrealized = %.3f, value = %.3f.
+HistoricalTicks: Request[%d]: receiving historical ticks %s.
+HistoricalTicksEnd: Request[%d]: all historical ticks received.
+HistoricalBidAskTicks: Request[%d]: receiving historical bid / ask ticks %s.
+HistoricalBidAskTicksEnd: Request[%d]: all historical bid / ask ticks received.
+HistoricalLastTicks: Request[%d]: receiving historical last ticks %s.
+HistoricalLastTicksEnd: Request[%d]: all historical last ticks received.
+TickByTickAllLast: Request[%d]: receiving tick by tick %s realtime ticks from ‹%s› at %s: %d @ %.3f, \
+    tick attribute: ‹%s›, special conditions: «%s».
+TickByTickBidAsk: Request[%d]: receiving tick by tick bid / ask realtime ticks at %s: bid = %d @ %.3f, \
+    ask = %d @ %.3f, tick attribute: ‹%s›.
+TickByTickMidPoint: Request[%d]: receiving tick by tick midpoint realtime ticks at %s: %.3f.
+OrderBound: Order %d#%d bound to permanent order %d.
+OrderComplete: Order ‹%s› on contract ‹%s› completed; state is ‹%s›.
+AllOrdersComplete: All completed orders received.
+FAReplaced: Request[%d]: financial advisor replaced with message «%s».
+WSHMetaData: Request[%d]: receiving WSH metadata «%s».
+WSHEventData: Request[%d]: receiving WSH event data «%s».

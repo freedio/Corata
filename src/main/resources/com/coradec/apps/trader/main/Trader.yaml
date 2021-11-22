@@ -1,0 +1,16 @@
+---
+DataProvider: com.coradec.apps.trader.ctrl.impl.AlphaVantage
+DB:
+  URI: "jdbc:hsqldb:file:/opt/trader-db/db"
+  Username: sa
+  Password: ""
+Parameters:
+  - EMA.11
+  - EMA.22
+  - RSI.5
+  - DMI.13
+  - ADX.13
+  - MACD.12.26.9
+  - FIX.13
+  - FIX.2
+  - VMA.17
