@@ -81,10 +81,11 @@ object InteractiveBroker : BasicBusEngine() {
 
     override fun run() {
         info(TEXT_STARTING_SIGNAL_PROCESSOR)
-        while (client.isConnected) {
+        while (client.isConnected && !Thread.interrupted()) {
             signal.waitForSignal()
             reader.processMsgs()
         }
+        debug("Interactive Broker was interrupted.")
         info(TEXT_TERMINATING_SIGNAL_PROCESSOR)
     }
 
@@ -117,6 +118,7 @@ object InteractiveBroker : BasicBusEngine() {
         // TODO we don't know handle to handle this yet.  It is already logged through the ResponseHandler
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun currentTime(voucher: CurrentTimeVoucher) {
         client.reqCurrentTime()
     }

@@ -443,17 +443,19 @@ object InteractiveResponseHandler : BasicBusNode(), EWrapper {
     }
 
     override fun error(errorMessage: String) {
-        error(TEXT_ERROR, errorMessage)
-        IMMEX.inject(ErrorEvent(here, message = errorMessage))
+        val normalized = errorMessage.replace(Regex("\r?\n"), "↵|")
+        error(TEXT_ERROR, normalized)
+        IMMEX.inject(ErrorEvent(here, message = normalized))
     }
 
     override fun error(requestId: Int, errorCode: Int, errorMessage: String) {
+        val normalized = errorMessage.replace(Regex("\r?\n"), "↵|")
         if (requestId == -1) {
-            info(TEXT_CODED_NOTIFICATION, errorCode, errorMessage)
-            IMMEX.inject(GeneralNotification(here, errorCode, errorMessage))
+            info(TEXT_CODED_NOTIFICATION, errorCode, normalized)
+            IMMEX.inject(GeneralNotification(here, errorCode, normalized))
         } else {
-            error(TEXT_CODED_ERROR, requestId, errorCode, errorMessage)
-            IMMEX.inject(CodedErrorEvent(here, requestId = requestId, errorCode = errorCode, message = errorMessage))
+            error(TEXT_CODED_ERROR, requestId, errorCode, normalized)
+            IMMEX.inject(CodedErrorEvent(here, requestId = requestId, errorCode = errorCode, message = normalized))
         }
     }
 

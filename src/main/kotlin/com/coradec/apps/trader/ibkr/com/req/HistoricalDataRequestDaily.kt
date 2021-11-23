@@ -2,17 +2,21 @@ package com.coradec.apps.trader.ibkr.com.req
 
 import com.coradec.apps.trader.com.impl.TitleDataRequestDaily
 import com.coradec.apps.trader.ibkr.com.InteractiveRequest
+import com.coradec.apps.trader.ibkr.com.event.CodedErrorEvent
 import com.coradec.apps.trader.ibkr.com.event.HistoricalDataEndEvent
 import com.coradec.apps.trader.ibkr.com.event.HistoricalDataEvent
 import com.coradec.apps.trader.ibkr.ctrl.InteractiveBroker
 import com.coradec.apps.trader.ibkr.ctrl.RequestId
 import com.coradec.apps.trader.ibkr.model.HistoricalBarType
 import com.coradec.apps.trader.ibkr.model.HistoricalBarType.Trades
+import com.coradec.apps.trader.ibkr.trouble.AmbiguouContractSpecificationException
+import com.coradec.apps.trader.ibkr.trouble.MissingMarketDataException
 import com.coradec.apps.trader.model.DailyQuote
 import com.coradec.apps.trader.model.Frequency.*
 import com.coradec.apps.trader.model.QuoteType
 import com.coradec.apps.trader.model.impl.BasicDailyQuote
 import com.coradec.coradeck.com.model.Notification
+import com.coradec.coradeck.com.module.CoraCom
 import com.coradec.coradeck.core.model.Origin
 import com.coradec.coradeck.core.model.Priority.B3
 import com.coradec.coradeck.core.util.asLocalDate
@@ -43,7 +47,7 @@ class HistoricalDataRequestDaily(
 
     override fun execute() {
         debug("Requesting %s history data for title ‹%s›.", barType.name, title.name)
-        subscribe(HistoricalDataEvent::class, HistoricalDataEndEvent::class)
+        subscribe(HistoricalDataEvent::class, HistoricalDataEndEvent::class, CodedErrorEvent::class)
         requestId = InteractiveBroker.requestHistoricalData(title, upto.atStartOfDay(), duration, title.frequency, barType)
     }
 
@@ -57,6 +61,14 @@ class HistoricalDataRequestDaily(
             if (barType == Trades) voucher.addQuantifiedQuotes(barType, bars.toQuantifiedQuotes())
             else voucher.addQuotes(barType, bars.toQuotes())
             succeed()
+        } else relax()
+        is CodedErrorEvent -> if (event.requestId == requestId) {
+            CoraCom.log.detail("Received error with code %d!", event.errorCode)
+            when (event.errorCode) {
+                200 -> fail(AmbiguouContractSpecificationException(event.message))
+                162 -> fail(MissingMarketDataException(event.message))
+                else -> relax()
+            }
         } else relax()
         else -> ignoreInformation(event)
     }

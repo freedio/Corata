@@ -25,6 +25,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
 
 class TitleUpdater(val db: Database) : BasicBusHub() {
+
     private lateinit var dayQuotes: RecordTable<DbQuote>
     private lateinit var titles: RecordTable<Title>
 
