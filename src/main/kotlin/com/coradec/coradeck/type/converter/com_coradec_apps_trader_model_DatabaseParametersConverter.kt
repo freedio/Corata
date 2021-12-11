@@ -5,7 +5,7 @@ import com.coradec.coradeck.type.ctrl.impl.BasicTypeConverter
 import com.coradec.coradeck.type.model.Password
 import java.net.URI
 
-class com_coradec_apps_trader_model_DatabaseParametersConverter :
+class com_coradec_apps_trader_model_DatabaseParametersConverter() :
     BasicTypeConverter<DatabaseParameters>(DatabaseParameters::class) {
     override fun convertFrom(value: Any): DatabaseParameters? = when (value) {
         is Map<*, *> -> {

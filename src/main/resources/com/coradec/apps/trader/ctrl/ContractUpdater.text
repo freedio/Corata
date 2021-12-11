@@ -1,0 +1,10 @@
+# Localized text base for default locale of class ContractUpdater
+
+Successful1: Request ‹%s› successful.
+Failed1: Request ‹%s› failed!
+Cancelled1: Request ‹%s› failed!
+Lost1: request ‹%s› got lost!
+AmbiguousContract1: Contract «%s» is ambiguous: add currency and / or originating exchange! → contract ignored.
+MissingMarketData2: Market data of type ‹%s> is missing for contract «%s»! → type data ignored.
+UnknownProblem3: An error occurred for market data type ‹%s› of contract «%s»: «%s»! → contract (partically) ignored.
+FreeFloatingError1: A free-floating error occurred: ‹%s›!

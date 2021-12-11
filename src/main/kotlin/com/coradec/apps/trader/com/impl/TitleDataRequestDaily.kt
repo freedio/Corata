@@ -1,59 +1,25 @@
 package com.coradec.apps.trader.com.impl
 
-import com.coradec.apps.trader.com.DataRequest
-import com.coradec.apps.trader.ibkr.model.HistoricalBarType
-import com.coradec.apps.trader.ibkr.model.HistoricalBarType.*
-import com.coradec.apps.trader.model.*
-import com.coradec.coradeck.com.model.impl.BasicVoucher
+import com.coradec.apps.trader.model.QuoteType
+import com.coradec.apps.trader.model.Title
+import com.coradec.apps.trader.model.TitleDataRequest
+import com.coradec.coradeck.com.model.impl.BasicRequest
 import com.coradec.coradeck.core.model.Origin
+import com.coradec.coradeck.core.model.Priority.B3
+import com.coradec.coradeck.core.util.asLocalDate
 import java.time.LocalDate
-import java.time.ZoneId
-import java.util.*
+import java.time.LocalDateTime
 
 class TitleDataRequestDaily(
     origin: Origin,
-    val title: Title,
-    val from: LocalDate,
-    val upto: LocalDate,
-    val barTypes: EnumSet<HistoricalBarType> = EnumSet.of(Trades, Bid, Ask, FeeRate, RebateRate)
-) : BasicVoucher<Map<LocalDate, Quotes>>(origin), DataRequest {
-    private val quotes = mutableMapOf<LocalDate, Quotes>()
+    override val title: Title,
+    private val dates: MutableSet<LocalDate>,
+    override val type: QuoteType
+) : BasicRequest(origin, priority = B3), TitleDataRequest {
+    override val capacity = dates.size
+    val first: LocalDate = dates.first()
+    val last: LocalDate = dates.last().plusDays(1)
 
-    fun addQuotes(barType: HistoricalBarType, quoteseq: Sequence<DailyQuote>) {
-        quoteseq.forEach { quote ->
-            val timestamp = quote.daystamp
-            val quotes = quotes.computeIfAbsent(timestamp) { Quotes(title, timestamp.atStartOfDay(ZoneId.systemDefault())) }
-            when (barType) {
-                Midpoint -> quotes.midpoints = quote.daily
-                Bid -> quotes.bids = quote.daily
-                Ask -> quotes.asks = quote.daily
-                BidAsk -> quotes.bidAsks = quote.daily
-                HistoricalVolatility -> quotes.historicalVolatilities = quote.daily
-                OptionImpliedVolatility -> quotes.optionImpliedVolatilities = quote.daily
-                FeeRate -> quotes.feeRates = quote.daily
-                RebateRate -> quotes.rebateRates = quote.daily
-                else -> throw IllegalArgumentException("Bar type ‹$barType› cannot be assigned with addQuotes()")
-            }
-        }
-    }
-
-    fun addQuantifiedQuotes(barType: HistoricalBarType, quoteseq: Sequence<DailyQuote>) {
-        quoteseq.forEach { quote ->
-            val timestamp = quote.daystamp
-            val quotes = quotes.computeIfAbsent(timestamp) { Quotes(title, timestamp.atStartOfDay(ZoneId.systemDefault())) }
-            when (barType) {
-                Trades -> quotes.trades = quote.dailyQuantified
-                else -> throw IllegalArgumentException("Bar type ‹$barType› cannot be assigned with addQuantifiedQuotes()")
-            }
-        }
-    }
-
-    fun seal() {
-        value = quotes
-        succeed()
-    }
-
-    private val DailyQuote.daily: Quote get() = Quote(open, high, low, close)
-    private val DailyQuote.dailyQuantified: QuantifiedQuote get() =
-        QuantifiedQuote(open, high, low, close, volume!!, weightedAveragePrice!!, count!!)
+    override fun contains(barstamp: LocalDateTime): Boolean = barstamp.toLocalDate() in dates
+    override fun parse(time: String): LocalDateTime = time.asLocalDate("yyyyMMdd").atStartOfDay()
 }

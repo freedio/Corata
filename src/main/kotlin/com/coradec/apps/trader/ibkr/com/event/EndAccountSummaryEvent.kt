@@ -1,6 +1,6 @@
 package com.coradec.apps.trader.ibkr.com.event
 
 import com.coradec.coradeck.core.model.Origin
-import com.coradec.coradeck.core.model.Priority
+import com.coradec.coradeck.core.model.Priority.B3
 
-class EndAccountSummaryEvent(origin: Origin, requestId: Int, priority: Priority): BasicRequestEvent(origin, requestId, priority)
+class EndAccountSummaryEvent(origin: Origin, requestId: Int): BasicRequestEvent(origin, requestId, B3)

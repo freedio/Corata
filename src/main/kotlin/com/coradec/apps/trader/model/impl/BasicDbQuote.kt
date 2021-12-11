@@ -4,11 +4,11 @@ import com.coradec.apps.trader.model.DbQuote
 import com.coradec.apps.trader.model.QuoteType
 import com.coradec.coradeck.db.annot.Indexed
 import com.coradec.coradeck.db.annot.Size
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class BasicDbQuote(
     override val titleRef: @Indexed @Size(7) String,
-    override val daystamp: @Indexed LocalDate,
+    override val timeStamp: @Indexed LocalDateTime,
     override val type: @Indexed QuoteType,
     override val open: Double,
     override val high: Double,

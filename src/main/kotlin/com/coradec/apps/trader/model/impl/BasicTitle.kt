@@ -17,5 +17,6 @@ data class BasicTitle(
     override val frequency: Frequency,
     override val inserted: ZonedDateTime,
     override val lastUpdated: ZonedDateTime?,
-    override val exchange: @Size(127) String? = null
+    override val exchange: @Size(31) String? = null,
+    override val primExch: @Size(31) String? = null
 ): Title

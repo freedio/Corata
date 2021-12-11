@@ -5,8 +5,6 @@ import com.coradec.apps.trader.ibkr.com.GetCurrentAccountVoucher
 import com.coradec.apps.trader.ibkr.com.event.*
 import com.coradec.apps.trader.ibkr.model.*
 import com.coradec.coradeck.bus.model.impl.BasicBusNode
-import com.coradec.coradeck.core.model.Priority.B1
-import com.coradec.coradeck.core.model.Priority.B3
 import com.coradec.coradeck.core.util.here
 import com.coradec.coradeck.ctrl.module.CoraControl
 import com.coradec.coradeck.text.model.LocalText
@@ -311,7 +309,7 @@ object InteractiveResponseHandler : BasicBusNode(), EWrapper {
     }
 
     override fun historicalData(requestId: Int, bar: Bar) {
-        info(TEXT_HISTORICAL_DATA_BAR, requestId, bar)
+        info(TEXT_HISTORICAL_DATA_BAR, requestId, bar.time())
         IMMEX.inject(HistoricalDataEvent(here, requestId, bar))
     }
 
@@ -343,7 +341,7 @@ object InteractiveResponseHandler : BasicBusNode(), EWrapper {
     }
 
     override fun currentTime(datetime: Long) {
-        val timestamp = LocalDateTime.ofInstant(Instant.ofEpochMilli(datetime), ZoneId.systemDefault())
+        val timestamp = LocalDateTime.ofInstant(Instant.ofEpochSecond(datetime), ZoneId.systemDefault())
         info(TEXT_CURRENT_TIME, timestamp)
         IMMEX.inject(TWSCurrentTimeEvent(here, timestamp))
     }
@@ -387,12 +385,12 @@ object InteractiveResponseHandler : BasicBusNode(), EWrapper {
     override fun accountSummary(requestId: Int, account: String, key: String, value: String, currency: String?) {
         if (currency == null) info(TEXT_ACCOUNT_SUMMARY, requestId, account, key, value)
         else info(TEXT_ACCOUNT_SUMMARY_CURRENCY, requestId, account, key, value, currency)
-        IMMEX.inject(AccountSummaryPositionEvent(here, requestId, account, key, value, currency, priority = B1))
+        IMMEX.inject(AccountSummaryPositionEvent(here, requestId, account, key, value, currency))
     }
 
     override fun accountSummaryEnd(requestId: Int) {
         info(TEXT_END_ACCOUNT_SUMMARY, requestId)
-        IMMEX.inject(EndAccountSummaryEvent(here, requestId, priority = B3))
+        IMMEX.inject(EndAccountSummaryEvent(here, requestId))
     }
 
     override fun verifyMessageAPI(apiData: String) {
@@ -444,19 +442,21 @@ object InteractiveResponseHandler : BasicBusNode(), EWrapper {
 
     override fun error(errorMessage: String) {
         val normalized = errorMessage.replace(Regex("\r?\n"), "↵|")
-        error(TEXT_ERROR, normalized)
+        info(TEXT_ERROR, normalized)
         IMMEX.inject(ErrorEvent(here, message = normalized))
     }
 
     override fun error(requestId: Int, errorCode: Int, errorMessage: String) {
         val normalized = errorMessage.replace(Regex("\r?\n"), "↵|")
-        if (requestId == -1) {
-            info(TEXT_CODED_NOTIFICATION, errorCode, normalized)
-            IMMEX.inject(GeneralNotification(here, errorCode, normalized))
-        } else {
-            error(TEXT_CODED_ERROR, requestId, errorCode, normalized)
+        if (requestId == -1) message(errorCode, normalized) else {
+            info(TEXT_CODED_ERROR, requestId, errorCode, normalized)
             IMMEX.inject(CodedErrorEvent(here, requestId = requestId, errorCode = errorCode, message = normalized))
         }
+    }
+
+    private fun message(errorCode: Int, normalized: String) {
+        info(TEXT_CODED_NOTIFICATION, errorCode, normalized)
+        IMMEX.inject(GeneralNotification(here, errorCode, normalized))
     }
 
     override fun connectionClosed() {

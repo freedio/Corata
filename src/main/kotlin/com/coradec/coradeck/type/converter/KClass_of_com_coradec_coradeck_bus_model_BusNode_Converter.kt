@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
 
 @Suppress("UNCHECKED_CAST")
-class KClass_of_com_coradec_coradeck_bus_model_BusNode_Converter :
+class KClass_of_com_coradec_coradeck_bus_model_BusNode_Converter() :
     BasicTypeConverter<KClass<BusNode>>(KClass::class as KClass<KClass<BusNode>>) {
     override fun convertFrom(value: Any): KClass<BusNode>? {
         TODO("Not yet implemented")

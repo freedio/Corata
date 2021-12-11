@@ -1,9 +1,9 @@
 ---
-DataProvider: com.coradec.apps.trader.ctrl.impl.AlphaVantage
 DB:
   URI: "jdbc:hsqldb:file:/opt/trader-db/db"
   Username: sa
   Password: ""
+RequestHandler: com.coradec.apps.trader.ibkr.ctrl.InteractiveRequestHandler
 Parameters:
   - EMA.11
   - EMA.22

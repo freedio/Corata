@@ -1,0 +1,43 @@
+---
+Analyzers:
+  EMAC11:
+    Algorithm: EMA
+    Source: Trades
+    Parameter: Close
+    Period: 11
+  EMAC22:
+    Algorithm: EMA
+    Source: Trades
+    Parameter: Close
+    Period: 22
+  EMAV17:
+    Algorithm: EMA
+    Source: Trades
+    Parameter: Volume
+    Period: 17
+  Force13:
+    Algorithm: ForceIndex
+    Source: Trades
+    Period: 13
+  Force02:
+    Algorithm: ForceIndex
+    Source: Trades
+    Period: 13
+  MACD122609:
+    Algorithm: MACD
+    Source: Trades
+    BaseAverage1: EMA
+    Period1: 12
+    BaseAverage2: EMA
+    Period2: 26
+    SignalAvgPeriod: 9
+  RSI05:
+    Algorithm: RSI
+    Source: Trades
+    Period: 5
+  ADXDMI:
+    Algorithm: ADX/DMI
+    Source: Trades
+    Parameter: Close
+    PeriodAvgDI: 13
+    PeriodAvgADX: 13

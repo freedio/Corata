@@ -1,0 +1,5 @@
+# Localized text base for default locale of calss AccountManager
+
+AccountUpdated2: Account «%s» updated:%s
+AccountCreated1: Account «%s» created.
+PositionProblem4: Request[%d]: Failed to add field «%s» with value «%s» to account «%s»!

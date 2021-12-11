@@ -1,10 +1,10 @@
 package com.coradec.apps.trader.model
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 interface DbQuote {
     val titleRef: String
-    val daystamp: LocalDate
+    val timeStamp: LocalDateTime
     val type: QuoteType
     val open: Double
     val high: Double

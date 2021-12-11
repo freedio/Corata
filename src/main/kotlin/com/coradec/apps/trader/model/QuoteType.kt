@@ -2,7 +2,7 @@ package com.coradec.apps.trader.model
 
 import com.coradec.coradeck.core.model.SqlTransformable
 
-enum class QuoteType(code: String): SqlTransformable {
+enum class QuoteType(val code: String): SqlTransformable {
     Trades("TRADES"),
     Midpoint("MIDPOINT"),
     Bid("BID"),

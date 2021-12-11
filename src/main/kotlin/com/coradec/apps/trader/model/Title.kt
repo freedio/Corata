@@ -12,4 +12,5 @@ interface Title {
     val inserted: ZonedDateTime
     val lastUpdated: ZonedDateTime?
     val exchange: String?
+    val primExch: String?
 }

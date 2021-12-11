@@ -1,6 +1,5 @@
 package com.coradec.apps.trader.ibkr.ctrl
 
-import com.coradec.apps.trader.ibkr.model.Accounts
 import com.coradec.apps.trader.model.Frequency
 import com.coradec.coradeck.com.model.Voucher
 import com.coradec.coradeck.conf.model.LocalProperty
@@ -16,9 +15,7 @@ object SwitchBoard {
     private val PROP_DEFAULT_FREQUENCY = LocalProperty<Frequency>("DefaultFrequency")
     private val properties = mutableMapOf<KClass<*>, Voucher<*>>()
     private lateinit var timeΔ: Duration
-    private val accountList = mutableListOf<String>()
 
-    val accounts: Voucher<Accounts> get() = lookup(Accounts::class)
     val nextOrder = AtomicInteger(0)
     val connectionAcknowledged = AtomicBoolean(false)
     val defaultFrequency: Frequency get() = PROP_DEFAULT_FREQUENCY.value
@@ -34,10 +31,4 @@ object SwitchBoard {
     fun setTimeΔ(timeTWS: LocalDateTime) {
         timeΔ = Duration.between(LocalDateTime.now(), timeTWS)
     }
-
-    fun addAccount(name: String) {
-        accountList += name
-    }
-
-    fun listAccounts(): Sequence<String> = accountList.asSequence()
 }
